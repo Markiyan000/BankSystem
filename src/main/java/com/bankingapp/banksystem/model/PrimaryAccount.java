@@ -21,7 +21,7 @@ public class PrimaryAccount {
     @OneToMany(mappedBy = "primaryAccount", cascade = CascadeType.ALL)
     private List<PrimaryTransaction> primaryTransactions;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

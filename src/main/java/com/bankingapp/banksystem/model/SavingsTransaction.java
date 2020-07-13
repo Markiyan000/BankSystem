@@ -2,7 +2,7 @@ package com.bankingapp.banksystem.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "savings_transaction")
@@ -13,7 +13,7 @@ public class SavingsTransaction {
     private Long id;
 
     @Column(name = "date")
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Column(name = "description")
     private String description;
@@ -30,7 +30,7 @@ public class SavingsTransaction {
     @Column(name = "available_balance")
     private BigDecimal availableBalance;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "savings_account_id")
     private SavingsAccount savingsAccount;
 
@@ -38,7 +38,7 @@ public class SavingsTransaction {
 
     }
 
-    public SavingsTransaction(LocalDate date, String description, String type, String status, Double amount, BigDecimal availableBalance) {
+    public SavingsTransaction(LocalDateTime date, String description, String type, String status, Double amount, BigDecimal availableBalance) {
         this.date = date;
         this.description = description;
         this.type = type;
@@ -55,11 +55,11 @@ public class SavingsTransaction {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

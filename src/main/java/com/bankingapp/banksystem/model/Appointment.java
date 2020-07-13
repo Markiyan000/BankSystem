@@ -1,7 +1,7 @@
 package com.bankingapp.banksystem.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "appointment")
@@ -12,7 +12,7 @@ public class Appointment {
     private Long id;
 
     @Column(name = "date")
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Column(name = "location")
     private String location;
@@ -39,11 +39,11 @@ public class Appointment {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
