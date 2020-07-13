@@ -1,19 +1,32 @@
 package com.bankingapp.banksystem.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "recipient")
 public class Recipient {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "phone")
     private String phone;
 
+    @Column(name = "account_number")
     private String accountNumber;
 
+    @Column(name = "description")
     private String description;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Recipient() {

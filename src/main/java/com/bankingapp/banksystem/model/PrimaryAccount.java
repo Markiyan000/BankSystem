@@ -1,18 +1,28 @@
 package com.bankingapp.banksystem.model;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Entity
+@Table(name = "primary_account")
 public class PrimaryAccount {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "account_number")
     private Integer accountNumber;
 
+    @Column(name = "account_balance")
     private BigDecimal accountBalance;
 
+    @OneToMany(mappedBy = "primaryAccount", cascade = CascadeType.ALL)
     private List<PrimaryTransaction> primaryTransactions;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public PrimaryAccount() {

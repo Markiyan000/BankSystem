@@ -1,24 +1,37 @@
 package com.bankingapp.banksystem.model;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "primary_transaction")
 public class PrimaryTransaction {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "date")
     private LocalDate date;
 
+    @Column(name = "description")
     private String description;
 
+    @Column(name = "type")
     private String type;
 
+    @Column(name = "status")
     private String status;
 
+    @Column(name = "amount")
     private Double amount;
 
+    @Column(name = "available_balance")
     private BigDecimal availableBalance;
 
+    @OneToOne
+    @JoinColumn(name = "primary_account_id")
     private PrimaryAccount primaryAccount;
 
     public PrimaryTransaction() {

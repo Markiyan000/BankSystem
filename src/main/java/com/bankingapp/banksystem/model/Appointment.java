@@ -1,19 +1,30 @@
 package com.bankingapp.banksystem.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "appointment")
 public class Appointment {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "date")
     private LocalDate date;
 
+    @Column(name = "location")
     private String location;
 
+    @Column(name = "description")
     private String description;
 
+    @Column(name = "is_confirmed")
     private Boolean isConfirmed;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Appointment() {

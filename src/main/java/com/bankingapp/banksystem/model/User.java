@@ -1,31 +1,47 @@
 package com.bankingapp.banksystem.model;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "user")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
+    @Column(name = "username")
     private String username;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "phone")
     private String phone;
 
+    @Column(name = "is_enabled")
     private Boolean isEnabled = true;
 
+    @OneToOne(mappedBy = "user")
     private PrimaryAccount primaryAccount;
 
+    @OneToOne(mappedBy = "user")
     private SavingsAccount savingsAccount;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Appointment> appointments;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Recipient> recipients;
 
     public User() {
@@ -128,4 +144,17 @@ public class User {
         this.recipients = recipients;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", isEnabled=" + isEnabled +
+                '}';
+    }
 }
