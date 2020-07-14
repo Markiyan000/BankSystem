@@ -21,7 +21,7 @@ public class RegistrationController {
         this.userService = userService;
     }
 
-    @GetMapping("/sign-up")
+    @GetMapping("/showForm")
     public String showFormSignUp(Model model) {
         User user = new User();
         model.addAttribute("user", user);
@@ -32,6 +32,6 @@ public class RegistrationController {
     @ResponseStatus(HttpStatus.CREATED)
     public String signUp(@ModelAttribute("user") User user) {
         userService.save(user);
-        return "redirect:/";
+        return "index";
     }
 }
