@@ -32,7 +32,8 @@
         <div class="card card-1">
             <div class="card-heading"></div>
             <div class="card-body">
-                <h2 class="title">Registration Info</h2>
+                <h2 class="title">Registration Info</h2><br>
+                <label th:if="${usernameExists}" id="userExists"><strong>Username already exists!</strong></label>
                 <form method="POST" th:action="@{/sign-up}">
 
                     <div class="input-group">

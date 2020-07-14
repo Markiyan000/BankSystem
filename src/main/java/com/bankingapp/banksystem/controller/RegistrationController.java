@@ -30,7 +30,11 @@ public class RegistrationController {
 
     @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
-    public String signUp(@ModelAttribute("user") User user) {
+    public String signUp(@ModelAttribute("user") User user, Model model) {
+        if (userService.checkExistsUserWithUsername(user.getUsername())) {
+            model.addAttribute("usernameExists", true);
+            return "sign-up";
+        }
         userService.save(user);
         return "index";
     }

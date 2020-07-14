@@ -26,4 +26,8 @@ public class UserService {
     public List<User> findAll() {
         return userDao.findAll();
     }
+
+    public boolean checkExistsUserWithUsername(String username) {
+        return userDao.existsUserByUsername(username);
+    }
 }
