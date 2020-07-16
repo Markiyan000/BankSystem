@@ -15,4 +15,5 @@ public class WelcomeController {
     public String index() {
         return "index";
     }
+
 }

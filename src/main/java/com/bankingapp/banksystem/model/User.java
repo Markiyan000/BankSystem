@@ -1,11 +1,18 @@
 package com.bankingapp.banksystem.model;
 
+import com.bankingapp.banksystem.model.security.Authority;
+import com.bankingapp.banksystem.model.security.UserRole;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,10 +40,10 @@ public class User {
     @Column(name = "is_enabled")
     private Boolean isEnabled = true;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private PrimaryAccount primaryAccount;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private SavingsAccount savingsAccount;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -45,9 +52,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Recipient> recipients;
 
-    public User() {
-
-    }
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<UserRole> roles = new HashSet<>();
 
     public Long getUserId() {
         return userId;
@@ -119,6 +125,7 @@ public class User {
 
     public void setPrimaryAccount(PrimaryAccount primaryAccount) {
         this.primaryAccount = primaryAccount;
+        primaryAccount.setUser(this);
     }
 
     public SavingsAccount getSavingsAccount() {
@@ -127,6 +134,7 @@ public class User {
 
     public void setSavingsAccount(SavingsAccount savingsAccount) {
         this.savingsAccount = savingsAccount;
+        savingsAccount.setUser(this);
     }
 
     public List<Appointment> getAppointments() {
@@ -143,6 +151,41 @@ public class User {
 
     public void setRecipients(List<Recipient> recipients) {
         this.recipients = recipients;
+    }
+
+    public Set<UserRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<UserRole> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        roles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
+        return authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
     @Override

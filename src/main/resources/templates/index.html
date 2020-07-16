@@ -3,92 +3,119 @@
 <head xmlns:th="http://www.w3.org/1999/xhtml">
 	<title>Sign In</title>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="sign-in/images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="sign-in/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="sign-in/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="sign-in/fonts/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="sign-in/vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="sign-in/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="sign-in/vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="sign-in/vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="sign-in/vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="sign-in/css/util.css">
-	<link rel="stylesheet" type="text/css" href="sign-in/css/main.css">
-<!--===============================================================================================-->
+	<style>
+		.login-page {
+			width: 360px;
+			padding: 8% 0 0;
+			margin: auto;
+		}
+		.form {
+			position: relative;
+			z-index: 1;
+			background: #FFFFFF;
+			max-width: 360px;
+			margin: 0 auto 100px;
+			padding: 45px;
+			text-align: center;
+			box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+		}
+		.form input {
+			font-family: "Roboto", sans-serif;
+			outline: 0;
+			background: #f2f2f2;
+			width: 100%;
+			border: 0;
+			margin: 0 0 15px;
+			padding: 15px;
+			box-sizing: border-box;
+			font-size: 14px;
+		}
+		.form button {
+			font-family: "Roboto", sans-serif;
+			text-transform: uppercase;
+			outline: 0;
+			background: #4CAF50;
+			width: 100%;
+			border: 0;
+			padding: 15px;
+			color: #FFFFFF;
+			font-size: 14px;
+			-webkit-transition: all 0.3 ease;
+			transition: all 0.3 ease;
+			cursor: pointer;
+		}
+		.form button:hover,.form button:active,.form button:focus {
+			background: #43A047;
+		}
+		.form .message {
+			margin: 15px 0 0;
+			color: #b3b3b3;
+			font-size: 12px;
+		}
+		.form .message a {
+			color: #4CAF50;
+			text-decoration: none;
+		}
+		.form .register-form {
+			display: none;
+		}
+		.container {
+			position: relative;
+			z-index: 1;
+			max-width: 300px;
+			margin: 0 auto;
+		}
+		.container:before, .container:after {
+			content: "";
+			display: block;
+			clear: both;
+		}
+		.container .info {
+			margin: 50px auto;
+			text-align: center;
+		}
+		.container .info h1 {
+			margin: 0 0 15px;
+			padding: 0;
+			font-size: 36px;
+			font-weight: 300;
+			color: #1a1a1a;
+		}
+		.container .info span {
+			color: #4d4d4d;
+			font-size: 12px;
+		}
+		.container .info span a {
+			color: #000000;
+			text-decoration: none;
+		}
+		.container .info span .fa {
+			color: #EF3B3A;
+		}
+		body {
+			background: green;
+			font-family: "Roboto", sans-serif;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+		.errorMessage {
+			color: red;
+			font-size: 12px;
+		}
+	</style>
 </head>
 <body>
-	
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('http://localhost:63342/bank-system/src/main/resources/static/sign-in/images/bg-01.jpg');">
-			<div class="wrap-login100">
-				<form class="login100-form validate-form" th:action="@{/index}" method="post">
-					<span class="login100-form-logo">
-						<i class="zmdi zmdi-landscape"></i>
-					</span>
-
-					<span class="login100-form-title p-b-34 p-t-27">
-						Log in
-					</span>
-
-					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-                        <label>
-                            <input class="input100" type="text" name="username" placeholder="Username" roleId="username">
-                        </label>
-                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <label>
-                            <input class="input100" type="password" name="pass" placeholder="Password">
-                        </label>
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
-					</div>
-
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" >
-							Login
-						</button>
-					</div><br><br>
-				</form>
-				<div class="container-login100-form-btn">
-					<button class="login100-form-btn" type="button" onclick = "window.location.href='/showForm'">
-						Sign Up
-					</button>
-				</div>
-			</div>
+	<div class="login-page">
+		<div class="form">
+			<label class="errorMessage" th:if="${param.error}"><strong>Invalid username or password!</strong></label>
+			<label class="errorMessage" th:if="${emptyUsername}"><strong>Please, input username!</strong></label>
+			<form class="login-form" th:action="@{/index}" method="post">
+				<input type="text" placeholder="username" name="username"/>
+				<input type="password" placeholder="password" name="password"/>
+				<button type="submit">login</button>
+				<p class="message">Not registered? <a href="/showForm">Create an account</a></p>
+			</form>
 		</div>
-	</div>
-	
-
-	<div id="dropDownSelect1"></div>
-	
-<!--===============================================================================================-->
-	<script src="sign-in/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="sign-in/vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="sign-in/vendor/bootstrap/js/popper.js"></script>
-	<script src="sign-in/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="sign-in/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="sign-in/vendor/daterangepicker/moment.min.js"></script>
-	<script src="sign-in/vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="sign-in/vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="sign-in/js/main.js"></script>
-
+</div>
 </body>
 </html>
