@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>User Page</title>
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/user-front/userFront.css">
 </head>
 <body>
-    <h1>HELLO</h1>
+
+<div class="main">
+
+<div class="balance" id="primaryBalance" th:href="@{/account/primaryAccount}">
+    <span id="primaryBalanceText">Primary Balance:</span>
+    <span th:text="${primaryAccount.accountBalance}"></span> $
+</div>
+
+<br><br>
+
+<div class="balance" id="savingsBalance" th:href="@{/account/savingsAccount}">
+    <span id="savingsBalanceText">Savings Balance:</span>
+    <span th:text="${savingsAccount.accountBalance}"></span> $
+</div>
+
+</div>
+
 </body>
 </html>
