@@ -2,26 +2,55 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>User Page</title>
+    <title>User Front</title>
     <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/user-front/userFront.css">
 </head>
 <body>
+<ul>
+    <li><a th:href="@{/userFront}">Home</a></li>
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Accounts</a>
+        <div class="dropdown-content">
+            <a th:href="@{/account/primary}">Primary</a>
+            <a th:href="@{/account/savings}">Savings</a>
+        </div>
+    </li>
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Transfer</a>
+        <div class="dropdown-content">
+            <a th:href="@{/transfer/betweenAccounts}">Between Accounts</a>
+            <a th:href="@{/transfer/toSomeoneElse}">To Someone Else</a>
+            <a th:href="@{/transfer/recipient}">Add/Edit Recipient</a>
+        </div>
+    </li>
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Appointment</a>
+        <div class="dropdown-content">
+            <a th:href="@{/appointment/create}">Schedule An Appointment</a>
+        </div>
+    </li>
+    <li id="logout"><a th:href="@{/logout}">Logout</a></li>
+</ul>
+<div class="main">
+    <div class="first" id="primaryBalance">
+        <span id="primaryBalanceText">Primary Balance:</span>
+        <span th:text="${primaryAccount.accountBalance}"></span> $
+    </div>
+    <div class="first" id="deposit" th:onclick="@{/account/deposit}">
+        <span class="actionInfo">Make A Deposit</span>
+        <img class="photo" src="http://localhost:63342/bank-system/src/main/resources/static/user-front/images/money-deposit.png" alt="Photo">
+    </div>
+</div>
 
 <div class="main">
-
-<div class="balance" id="primaryBalance" th:href="@{/account/primaryAccount}">
-    <span id="primaryBalanceText">Primary Balance:</span>
-    <span th:text="${primaryAccount.accountBalance}"></span> $
+    <div class="second" id="savingsBalance">
+        <span id="savingsBalanceText">Savings Balance:</span>
+        <span th:text="${savingsAccount.accountBalance}"></span> $
+    </div>
+    <div class="second" id="withdraw" th:onclick="@{/account/withdraw}">
+        <span class="actionInfo">Go To Withdrawal</span>
+        <img class="photo" src="http://localhost:63342/bank-system/src/main/resources/static/user-front/images/money-withdrawal.png" alt="Photo">
+    </div>
 </div>
-
-<br><br>
-
-<div class="balance" id="savingsBalance" th:href="@{/account/savingsAccount}">
-    <span id="savingsBalanceText">Savings Balance:</span>
-    <span th:text="${savingsAccount.accountBalance}"></span> $
-</div>
-
-</div>
-
 </body>
 </html>

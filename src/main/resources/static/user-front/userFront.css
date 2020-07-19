@@ -2,16 +2,34 @@ body {
     background-color: #B0E0E6;
 }
 
-.balance {
+#header {
+    width: 100%;
+    height: 75px;
+    border: 3px solid black;
+}
+.main {
+    width: 800px;
+    height: 200px;
+    margin-top: 50px;
+    margin-left: 200px;
+}
+.header-option {
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    border: 3px solid black;
+    margin-top: 10px;
+    margin-left: 100px;
+}
+#primaryBalance, #savingsBalance {
     background-color: white;
     height: 100px;
     width: 400px;
-    margin-top: 100px;
-    margin-left: 100px;
+    margin-top: 50px;
+    margin-left: 50px;
     border: 2px solid;
     font-size: 20px;
     font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
-    display: inline-block;
 }
 
 #primaryBalance:hover {
@@ -36,3 +54,104 @@ body {
     color: red;
 }
 
+.first, .second {
+    display: inline-block;
+}
+
+#deposit, #withdraw {
+    border: 2px solid black;
+    width: 200px;
+    height: 100px;
+    margin-top: 50px;
+    float: right;
+    background-color: white;
+}
+
+.actionInfo {
+    font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+#withdraw {
+    color: red;
+    align: center;
+}
+
+#deposit {
+    color: green;
+}
+
+#deposit:hover {
+    background-color: lightgreen;
+}
+
+#withdraw:hover {
+    background-color: #FFCCCB;
+}
+
+.photo {
+    height: 75px;
+    width: 75px;
+    margin-left: 60px;
+}
+
+#me {
+    margin-left: 400px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+}
+
+li {
+    float: left;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#logout {
+    float: right;
+}
