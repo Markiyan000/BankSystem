@@ -28,6 +28,19 @@ public abstract class Transaction {
     @Column(name = "available_balance")
     private BigDecimal availableBalance;
 
+    public Transaction() {
+
+    }
+
+    public Transaction(LocalDateTime date, String description, String type, String status, Double amount, BigDecimal availableBalance) {
+        this.date = date;
+        this.description = description;
+        this.type = type;
+        this.status = status;
+        this.amount = amount;
+        this.availableBalance = availableBalance;
+    }
+
     public Long getId() {
         return id;
     }
@@ -83,6 +96,5 @@ public abstract class Transaction {
     public void setAvailableBalance(BigDecimal availableBalance) {
         this.availableBalance = availableBalance;
     }
-
 
 }

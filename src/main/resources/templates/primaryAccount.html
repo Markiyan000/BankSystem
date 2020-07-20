@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="header">
     <meta charset="UTF-8">
     <title>Primary Account</title>
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/user-front/userFront.css">
 </head>
 <body>
+
+    <div class="first" id="primaryBalance">
+          <span id="primaryBalanceText">Primary Balance:</span>
+          <span th:text="${primaryAccount.accountBalance}"></span> $
+    </div>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Amount</th>
+            <th>Available Balance</th>
+        </tr>
+        <tr data-th-each="primaryTransaction : ${primaryTransactions}">
+            <td data-th-text="${primaryTransaction.date}">...</td>
+            <td data-th-text="${primaryTransaction.description}">...</td>
+            <td data-th-text="${primaryTransaction.type}">...</td>
+            <td data-th-text="${primaryTransaction.status}">...</td>
+            <td data-th-text="${primaryTransaction.amount}">...</td>
+            <td data-th-text="${primaryTransaction.availableBalance}">...</td>
+        </tr>
+    </table>
 
 </body>
 </html>

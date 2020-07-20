@@ -10,6 +10,11 @@ public class SavingsAccount extends Account{
     @OneToMany(mappedBy = "savingsAccount", cascade = CascadeType.ALL)
     private List<SavingsTransaction> savingsTransactions;
 
+    public void addTransaction(SavingsTransaction savingsTransaction) {
+        savingsTransactions.add(savingsTransaction);
+        savingsTransaction.setSavingsAccount(this);
+    }
+
     public List<SavingsTransaction> getSavingsTransactions() {
         return savingsTransactions;
     }

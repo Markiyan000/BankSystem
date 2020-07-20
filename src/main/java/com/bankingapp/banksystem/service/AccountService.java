@@ -1,11 +1,10 @@
 package com.bankingapp.banksystem.service;
 
-import com.bankingapp.banksystem.model.PrimaryAccount;
-import com.bankingapp.banksystem.model.SavingsAccount;
-import com.bankingapp.banksystem.model.User;
+import com.bankingapp.banksystem.model.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Service
 public class AccountService {
@@ -13,38 +12,34 @@ public class AccountService {
     @Transactional
     public void makeDeposit(User user, String accountType, Double amount) {
         if (accountType.equalsIgnoreCase("primary")) {
-            makePrimaryAccountDeposit(user, amount);
+            PrimaryAccount primaryAccount = user.getPrimaryAccount();
+            deposit(primaryAccount, amount);
+            primaryAccount.addTransaction(new PrimaryTransaction(LocalDateTime.now(), "Deposit To Primary Account", "Account", "Finished", amount, primaryAccount.getAccountBalance()));
         } else {
-            makeSavingsAccountDeposit(user, amount);
+            SavingsAccount savingsAccount = user.getSavingsAccount();
+            deposit(savingsAccount, amount);
+            savingsAccount.addTransaction(new SavingsTransaction(LocalDateTime.now(), "Deposit To Savings Account", "Account", "Finished", amount, savingsAccount.getAccountBalance()));
         }
     }
 
     @Transactional
     public void makeWithdraw(User user, String accountType, Double amount) {
-        if(accountType.equalsIgnoreCase("primary")) {
-            makePrimaryAccountWithdraw(user, amount);
+        if (accountType.equalsIgnoreCase("primary")) {
+            PrimaryAccount primaryAccount = user.getPrimaryAccount();
+            withdraw(primaryAccount, amount);
+            primaryAccount.addTransaction(new PrimaryTransaction(LocalDateTime.now(), "Withdraw From Primary Account", "Account", "Finished", amount, primaryAccount.getAccountBalance()));
         } else {
-            makeSavingsAccountWithdraw(user, amount);
+            SavingsAccount savingsAccount = user.getSavingsAccount();
+            withdraw(savingsAccount, amount);
+            savingsAccount.addTransaction(new SavingsTransaction(LocalDateTime.now(), "Withdraw From Savings Account", "Account", "Finished", amount, savingsAccount.getAccountBalance()));
         }
     }
 
-    private void makePrimaryAccountDeposit(User user, Double amount) {
-        PrimaryAccount primaryAccount = user.getPrimaryAccount();
-        primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().add(new BigDecimal(amount)));
+    private void deposit(Account account, double amount) {
+        account.setAccountBalance(account.getAccountBalance().add(new BigDecimal(amount)));
     }
 
-    private void makeSavingsAccountDeposit(User user, Double amount) {
-        SavingsAccount savingsAccount = user.getSavingsAccount();
-        savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().add(new BigDecimal(amount)));
-    }
-
-    private void makePrimaryAccountWithdraw(User user, Double amount) {
-        PrimaryAccount primaryAccount = user.getPrimaryAccount();
-        primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
-    }
-
-    private void makeSavingsAccountWithdraw(User user, Double amount) {
-        SavingsAccount savingsAccount = user.getSavingsAccount();
-        savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().subtract(new BigDecimal(amount)));
+    private void withdraw(Account account, double amount) {
+        account.setAccountBalance(account.getAccountBalance().subtract(new BigDecimal(amount)));
     }
 }

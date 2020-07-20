@@ -26,7 +26,7 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping("/primaryAccount")
+    @GetMapping("/primary")
     public String primaryAccount(Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
 
@@ -39,7 +39,7 @@ public class AccountController {
         return "primaryAccount";
     }
 
-    @GetMapping("/savingsAccount")
+    @GetMapping("/savings")
     public String savingsAccount(Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
 

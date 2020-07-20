@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/user-front/userFront.css">
+</head>
+<body>
+<ul>
+    <li><a th:href="@{/userFront}">Home</a></li>
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Accounts</a>
+        <div class="dropdown-content">
+            <a th:href="@{/account/primary}">Primary</a>
+            <a th:href="@{/account/savings}">Savings</a>
+        </div>
+    </li>
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Transfer</a>
+        <div class="dropdown-content">
+            <a th:href="@{/transfer/betweenAccounts}">Between Accounts</a>
+            <a th:href="@{/transfer/toSomeoneElse}">To Someone Else</a>
+            <a th:href="@{/transfer/recipient}">Add/Edit Recipient</a>
+        </div>
+    </li>
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Appointment</a>
+        <div class="dropdown-content">
+            <a th:href="@{/appointment/create}">Schedule An Appointment</a>
+        </div>
+    </li>
+    <li id="logout"><a th:href="@{/logout}">Logout</a></li>
+</ul>
+</body>
+</html>
