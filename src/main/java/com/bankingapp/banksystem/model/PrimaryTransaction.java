@@ -16,10 +16,6 @@ public class PrimaryTransaction extends Transaction{
 
     }
 
-    public PrimaryTransaction(PrimaryAccount primaryAccount) {
-        this.primaryAccount = primaryAccount;
-    }
-
     public PrimaryTransaction(LocalDateTime date, String description, String type, String status, Double amount, BigDecimal availableBalance) {
         super(date, description, type, status, amount, availableBalance);
     }

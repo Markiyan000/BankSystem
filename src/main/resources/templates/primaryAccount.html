@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="header">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Primary Account</title>
     <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/user-front/userFront.css">
 </head>
@@ -12,7 +13,7 @@
           <span th:text="${primaryAccount.accountBalance}"></span> $
     </div>
 
-    <table>
+    <table id="transactionTable">
         <tr>
             <th>Date</th>
             <th>Description</th>
@@ -21,13 +22,13 @@
             <th>Amount</th>
             <th>Available Balance</th>
         </tr>
-        <tr data-th-each="primaryTransaction : ${primaryTransactions}">
-            <td data-th-text="${primaryTransaction.date}">...</td>
-            <td data-th-text="${primaryTransaction.description}">...</td>
-            <td data-th-text="${primaryTransaction.type}">...</td>
-            <td data-th-text="${primaryTransaction.status}">...</td>
-            <td data-th-text="${primaryTransaction.amount}">...</td>
-            <td data-th-text="${primaryTransaction.availableBalance}">...</td>
+        <tr th:each="primaryTransaction: ${primaryTransactions}">
+            <td th:text="${primaryTransaction.date}">...</td>
+            <td th:text="${primaryTransaction.description}">...</td>
+            <td th:text="${primaryTransaction.type}">...</td>
+            <td th:text="${primaryTransaction.status}">...</td>
+            <td th:text="${primaryTransaction.amount}">...</td>
+            <td th:text="${primaryTransaction.availableBalance}">...</td>
         </tr>
     </table>
 
