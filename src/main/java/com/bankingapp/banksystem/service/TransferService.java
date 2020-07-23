@@ -23,6 +23,17 @@ public class TransferService {
         }
     }
 
+    @Transactional
+    public void transferToReceiver(User sender, User receiver, double amount) {
+        PrimaryAccount senderAccount = sender.getPrimaryAccount();
+        PrimaryAccount receiverAccount = receiver.getPrimaryAccount();
+
+        senderAccount.addTransaction(new PrimaryTransaction(LocalDateTime.now(), "Transfer To" + receiver.getUsername(), "Transfer", "Finished", amount, senderAccount.getAccountBalance()));
+        receiverAccount.addTransaction(new PrimaryTransaction(LocalDateTime.now(), "Received From" + sender.getUsername(), "Transfer", "Finished", amount, receiverAccount.getAccountBalance()));
+
+        transfer(senderAccount, receiverAccount, amount);
+    }
+
     private void transfer(Account from, Account to, double amount) {
         from.setAccountBalance(from.getAccountBalance().subtract(new BigDecimal(amount)));
         to.setAccountBalance(to.getAccountBalance().add(new BigDecimal(amount)));

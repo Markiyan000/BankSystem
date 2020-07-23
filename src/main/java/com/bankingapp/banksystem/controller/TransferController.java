@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.security.Principal;
 
 @Controller
@@ -35,4 +34,13 @@ public class TransferController {
         return "redirect:/userFront";
     }
 
+    @GetMapping("/toReceiver/{receiverName}/{amount}")
+    public String transferToReceiver(Principal principal, @PathVariable String receiverName, @PathVariable String amount) {
+        User sender = userService.findByUsername(principal.getName());
+        User receiver = userService.findByUsername(receiverName);
+
+        transferService.transferToReceiver(sender, receiver, Double.parseDouble(amount));
+
+        return "redirect:/userFront";
+    }
 }
