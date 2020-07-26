@@ -11,16 +11,7 @@
 
     <div id="formDiv">
         <form th:action="@{/account/deposit}">
-            <label>
-                <select th:value="${accountType}" name="accountType">
-                    <option selected="selected" value="primary">Primary Account</option>
-                    <option value="savings">Savings Account</option>
-                </select>
-            </label><br/>
-            <label>
-                <input th:value="${amount}" name="amount" value="0">
-            </label><br/>
-            <button type="submit">SUBMIT</button>
+            <div th:replace="common/actionForm"></div>
         </form>
     </div>
 
