@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Deposit Form</title>
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/depositForm.css">
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/header.css">
+</head>
+<body>
+    <div th:replace="common/header"></div>
+
+    <div id="formDiv">
+        <form th:action="@{/account/deposit}">
+            <label>
+                <select th:value="${accountType}" name="accountType">
+                    <option selected="selected" value="primary">Primary Account</option>
+                    <option value="savings">Savings Account</option>
+                </select>
+            </label><br/>
+            <label>
+                <input th:value="${amount}" name="amount" value="0">
+            </label><br/>
+            <button type="submit">SUBMIT</button>
+        </form>
+    </div>
+
+</body>
+</html>

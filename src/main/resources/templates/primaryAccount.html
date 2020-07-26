@@ -1,36 +1,79 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="header">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Primary Account</title>
     <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/user-front/userFront.css">
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/header.css">
+    <link rel="icon" type="image/png" href="http://localhost:63342/bank-system/src/main/resources/static/account/images/icons/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="http://localhost:63342/bank-system/src/main/resources/static/account/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:63342/bank-system/src/main/resources/static/account/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:63342/bank-system/src/main/resources/static/account/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:63342/bank-system/src/main/resources/static/account/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:63342/bank-system/src/main/resources/static/account/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:63342/bank-system/src/main/resources/static/account/css/main.css">
 </head>
 <body>
+    <div th:replace="common/header"></div>
 
     <div class="first" id="primaryBalance">
-          <span id="primaryBalanceText">Primary Balance:</span>
-          <span th:text="${primaryAccount.accountBalance}"></span> $
+        <span id="primaryBalanceText">Primary Balance:</span>
+        <span th:text="${primaryAccount.accountBalance}"></span> $
     </div>
 
-    <table id="transactionTable">
-        <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Amount</th>
-            <th>Available Balance</th>
-        </tr>
-        <tr th:each="primaryTransaction: ${primaryTransactions}">
-            <td th:text="${primaryTransaction.date}">...</td>
-            <td th:text="${primaryTransaction.description}">...</td>
-            <td th:text="${primaryTransaction.type}">...</td>
-            <td th:text="${primaryTransaction.status}">...</td>
-            <td th:text="${primaryTransaction.amount}">...</td>
-            <td th:text="${primaryTransaction.availableBalance}">...</td>
-        </tr>
-    </table>
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table100 ver1 m-b-110">
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr class="row100 head">
+                                    <th class="cell100 column1">Date</th>
+                                    <th class="cell100 column2">Description</th>
+                                    <th class="cell100 column3">Type</th>
+                                    <th class="cell100 column4">Status</th>
+                                    <th class="cell100 column5">Amount</th>
+                                    <th class="cell100 column6">Available Balance</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="table100-body js-pscroll">
+                        <table th:each="primaryTransaction: ${primaryTransactions}">
+                            <tbody>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1" th:text="${primaryTransaction.date}">...</td>
+                                    <td class="cell100 column2" th:text="${primaryTransaction.description}">...</td>
+                                    <td class="cell100 column3" th:text="${primaryTransaction.type}">...</td>
+                                    <td class="cell100 column4" th:text="${primaryTransaction.status}">...</td>
+                                    <td class="cell100 column5" th:text="${primaryTransaction.amount}">...</td>
+                                    <td class="cell100 column5" th:text="${primaryTransaction.availableBalance}">...</td>
+                                 </tr>
+                             </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://localhost:63342/bank-system/src/main/resources/static/account/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="http://localhost:63342/bank-system/src/main/resources/static/account/vendor/bootstrap/js/popper.js"></script>
+    <script src="http://localhost:63342/bank-system/src/main/resources/static/account/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://localhost:63342/bank-system/src/main/resources/static/account/vendor/select2/select2.min.js"></script>
+    <script src="http://localhost:63342/bank-system/src/main/resources/static/account/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script>
+        $('.js-pscroll').each(function(){
+            var ps = new PerfectScrollbar(this);
+            $(window).on('resize', function(){
+                ps.update();
+            })
+        });
+    </script>
+    <script src="http://localhost:63342/bank-system/src/main/resources/static/account/js/main.js"></script>
 
 </body>
 </html>

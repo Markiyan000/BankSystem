@@ -1,3 +1,11 @@
+body {
+    background: #D3D3D3;
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
 .login-page {
     width: 360px;
     padding: 8% 0 0;
@@ -86,13 +94,4 @@
 .container .info span .fa {
     color: #EF3B3A;
 }
-body {
-    background: #D3D3D3;
-    font-family: "Roboto", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-.errorMessage {
-    color: red;
-    font-size: 12px;
-}
+

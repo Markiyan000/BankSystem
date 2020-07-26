@@ -2,13 +2,15 @@ package com.bankingapp.banksystem.controller;
 
 import com.bankingapp.banksystem.model.*;
 import com.bankingapp.banksystem.service.AccountService;
+import com.bankingapp.banksystem.service.ErrorValidationService;
 import com.bankingapp.banksystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -19,7 +21,6 @@ public class AccountController {
     private UserService userService;
 
     private AccountService accountService;
-
     @Autowired
     public AccountController(UserService userService, AccountService accountService) {
         this.userService = userService;
@@ -52,15 +53,25 @@ public class AccountController {
         return "savingsAccount";
     }
 
-    @GetMapping("/deposit/{accountType}/{amount}")
-    public String makeDeposit(@PathVariable String accountType, @PathVariable String amount, Principal principal) {
+    @GetMapping("/showFormForDeposit")
+    public String showFormForDeposit() {
+        return "depositForm";
+    }
+
+    @GetMapping("/showFormForWithdraw")
+    public String showFormForWithdraw() {
+        return "withdrawForm";
+    }
+
+    @GetMapping("/deposit")
+    public String makeDeposit(@RequestParam String accountType, @RequestParam String amount, Principal principal) {
         User user = userService.findByUsername(principal.getName());
         accountService.makeDeposit(user, accountType, Double.parseDouble(amount));
         return "redirect:/userFront";
     }
 
-    @GetMapping("/withdraw/{accountType}/{amount}")
-    public String makeWithDraw(@PathVariable String accountType, @PathVariable String amount, Principal principal) {
+    @GetMapping("/withdraw")
+    public String makeWithDraw(@RequestParam String accountType, @RequestParam String amount, Principal principal) {
         User user = userService.findByUsername(principal.getName());
         accountService.makeWithdraw(user, accountType, Double.parseDouble(amount));
         return "redirect:/userFront";
