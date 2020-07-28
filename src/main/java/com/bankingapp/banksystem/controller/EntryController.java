@@ -22,7 +22,6 @@ public class EntryController {
     @GetMapping("/userFront")
     public String userFront(Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
-
         model.addAttribute("primaryAccount", user.getPrimaryAccount());
         model.addAttribute("savingsAccount", user.getSavingsAccount());
 

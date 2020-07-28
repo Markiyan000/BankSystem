@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,13 +25,6 @@ public class RegistrationController {
     public RegistrationController(UserService userService, RoleDao roleDao) {
         this.userService = userService;
         this.roleDao = roleDao;
-    }
-
-    @GetMapping("/showForm")
-    public String showFormSignUp(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "sign-up";
     }
 
     @PostMapping("/sign-up")

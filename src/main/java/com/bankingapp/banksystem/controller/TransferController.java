@@ -6,8 +6,8 @@ import com.bankingapp.banksystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 
 @Controller
@@ -24,18 +24,19 @@ public class TransferController {
         this.transferService = transferService;
     }
 
-    @GetMapping("/betweenAccounts/{from}/{amount}")
+    @GetMapping("/betweenAccounts")
     public String transferBetweenAccounts(Principal principal,
-                                          @PathVariable String from,
-                                          @PathVariable String amount) {
+                                          @RequestParam String accountType,
+                                          @RequestParam String amount) {
         User user = userService.findByUsername(principal.getName());
-        transferService.transferBetweenAccounts(user, from, Double.parseDouble(amount));
+        transferService.transferBetweenAccounts(user, accountType, Double.parseDouble(amount));
 
         return "redirect:/userFront";
     }
 
-    @GetMapping("/toReceiver/{receiverName}/{amount}")
-    public String transferToReceiver(Principal principal, @PathVariable String receiverName, @PathVariable String amount) {
+    @GetMapping("/toReceiver")
+    public String transferToReceiver(Principal principal, @RequestParam String receiverName,
+                                     @RequestParam String amount) {
         User sender = userService.findByUsername(principal.getName());
         User receiver = userService.findByUsername(receiverName);
 

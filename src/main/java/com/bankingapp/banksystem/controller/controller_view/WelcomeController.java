@@ -1,4 +1,4 @@
-package com.bankingapp.banksystem.controller;
+package com.bankingapp.banksystem.controller.controller_view;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

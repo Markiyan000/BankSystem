@@ -2,19 +2,19 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Deposit Form</title>
-    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/depositForm.css">
-    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/header.css">
+    <title>Transfer Between Accounts</title>
     <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/common/transfer.css">
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/transferBetweenAccounts.css">
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/header.css">
+
 </head>
 <body>
     <div th:replace="common/header"></div>
 
     <div id="formDiv">
-        <form th:action="@{/account/deposit}">
+        <form th:action="@{/transfer/betweenAccounts}">
             <div th:replace="common/actionForm"></div>
         </form>
     </div>
-
 </body>
 </html>

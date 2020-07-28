@@ -1,9 +1,9 @@
 input[type=text] {
-    border: 2px solid green;
+    border: 2px solid blue;
 }
 
 input:hover, select:hover {
-    background-color: lightgreen;
+    background-color: lightblue;
 }
 
 select {
@@ -12,13 +12,13 @@ select {
     margin: 8px 0;
     font-size: 20px;
     border-radius: 3px;
-    border: 2px solid green;
+    border: 2px solid blue;
 }
 
 .submit {
-    border: 2px solid green;
+    border: 2px solid blue;
 }
 
 .submit:hover{
-    background-color: green;
+    background-color: blue;
 }
