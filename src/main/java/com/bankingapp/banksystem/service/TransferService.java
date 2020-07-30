@@ -28,8 +28,8 @@ public class TransferService {
         PrimaryAccount senderAccount = sender.getPrimaryAccount();
         PrimaryAccount receiverAccount = receiver.getPrimaryAccount();
 
-        senderAccount.addTransaction(new PrimaryTransaction(LocalDateTime.now(), "Transfer To" + receiver.getUsername(), "Transfer", "Finished", amount, senderAccount.getAccountBalance()));
-        receiverAccount.addTransaction(new PrimaryTransaction(LocalDateTime.now(), "Received From" + sender.getUsername(), "Transfer", "Finished", amount, receiverAccount.getAccountBalance()));
+        senderAccount.addTransaction(new PrimaryTransaction(LocalDateTime.now(), "Transfer To " + receiver.getUsername(), "Transfer", "Finished", amount, senderAccount.getAccountBalance()));
+        receiverAccount.addTransaction(new PrimaryTransaction(LocalDateTime.now(), "Received From " + sender.getUsername(), "Transfer", "Finished", amount, receiverAccount.getAccountBalance()));
 
         transfer(senderAccount, receiverAccount, amount);
     }

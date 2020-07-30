@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Transfer To Receiver</title>
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/common/transfer.css">
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/header.css">
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/transferToReceiver.css">
 </head>
 <body>
-
+    <div th:replace="common/header"></div>
+    <div id="formDiv">
+        <span th:if="${userNotExists}" style="margin-left: 300px"><strong style="color: red">User isn't exists!</strong></span>
+        <form th:action="@{/transfer/toReceiver}">
+            <label>
+                <input type="text" th:value="${receiverName}" name="receiverName" placeholder="Enter receiver name...">
+            </label>
+            <label>
+                <input type="text" th:value="${amount}" name="amount" placeholder="Enter amount...">
+            </label>
+            <button class="submit" type="submit">TRANSFER</button>
+        </form>
+    </div>
 </body>
 </html>

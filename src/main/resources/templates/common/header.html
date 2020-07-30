@@ -19,14 +19,7 @@
         <a href="javascript:void(0)" class="dropbtn">Transfer</a>
         <div class="dropdown-content">
             <a th:href="@{/transfer/showTransferBetweenAccounts}">Between Accounts</a>
-            <a th:href="@{/transfer/toSomeoneElse}">To Someone Else</a>
-            <a th:href="@{/transfer/recipient}">Add/Edit Recipient</a>
-        </div>
-    </li>
-    <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Appointment</a>
-        <div class="dropdown-content">
-            <a th:href="@{/appointment/create}">Schedule An Appointment</a>
+            <a th:href="@{/transfer/showTransferToReceiver}">To Someone Else</a>
         </div>
     </li>
     <li id="logout"><a th:href="@{/logout}">Logout</a></li>
