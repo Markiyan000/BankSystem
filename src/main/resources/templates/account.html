@@ -18,8 +18,8 @@
     <div th:replace="common/header"></div>
 
     <div class="first" id="primaryBalance">
-        <span id="primaryBalanceText">Primary Balance:</span>
-        <span th:text="${primaryAccount.accountBalance}"></span> $
+        <span id="primaryBalanceText">Balance:</span>
+        <span th:text="${account.accountBalance}"></span> $
     </div>
 
     <div class="limiter">
@@ -42,15 +42,15 @@
                     </div>
 
                     <div class="table100-body js-pscroll">
-                        <table th:each="primaryTransaction: ${primaryTransactions}">
+                        <table th:each="transaction: ${transactions}">
                             <tbody>
                                 <tr class="row100 body">
-                                    <td class="cell100 column1" th:text="${primaryTransaction.date}">...</td>
-                                    <td class="cell100 column2" th:text="${primaryTransaction.description}">...</td>
-                                    <td class="cell100 column3" th:text="${primaryTransaction.type}">...</td>
-                                    <td class="cell100 column4" th:text="${primaryTransaction.status}">...</td>
-                                    <td class="cell100 column5" th:text="${primaryTransaction.amount}">...</td>
-                                    <td class="cell100 column5" th:text="${primaryTransaction.availableBalance}">...</td>
+                                    <td class="cell100 column1" th:text="${transaction.date}">...</td>
+                                    <td class="cell100 column2" th:text="${transaction.description}">...</td>
+                                    <td class="cell100 column3" th:text="${transaction.type}">...</td>
+                                    <td class="cell100 column4" th:text="${transaction.status}">...</td>
+                                    <td class="cell100 column5" th:text="${transaction.amount}">...</td>
+                                    <td class="cell100 column5" th:text="${transaction.availableBalance}">...</td>
                                  </tr>
                              </tbody>
                         </table>

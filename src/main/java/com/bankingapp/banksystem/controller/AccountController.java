@@ -1,5 +1,7 @@
 package com.bankingapp.banksystem.controller;
 
+import com.bankingapp.banksystem.factory.AccountFactory;
+import com.bankingapp.banksystem.factory.TransactionFactory;
 import com.bankingapp.banksystem.model.*;
 import com.bankingapp.banksystem.service.AccountService;
 import com.bankingapp.banksystem.service.UserService;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
@@ -19,32 +22,22 @@ public class AccountController {
     private UserService userService;
 
     private AccountService accountService;
+
     @Autowired
     public AccountController(UserService userService, AccountService accountService) {
         this.userService = userService;
         this.accountService = accountService;
     }
 
-    @GetMapping("/primary")
-    public String primaryAccount(Principal principal, Model model) {
+    @GetMapping("/{type}")
+    public String account(@PathVariable String type, Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
-        PrimaryAccount primaryAccount = user.getPrimaryAccount();
-        List<PrimaryTransaction> primaryTransactions = primaryAccount.getPrimaryTransactions();
-        model.addAttribute("primaryAccount", primaryAccount);
-        model.addAttribute("primaryTransactions", primaryTransactions);
+        Account account = AccountFactory.getAccount(user, type);
+        List<Transaction> transactions = TransactionFactory.getTransactions(user, type);
+        model.addAttribute("account", account);
+        model.addAttribute("transactions", transactions);
 
-        return "primaryAccount";
-    }
-
-    @GetMapping("/savings")
-    public String savingsAccount(Principal principal, Model model) {
-        User user = userService.findByUsername(principal.getName());
-        SavingsAccount savingsAccount = user.getSavingsAccount();
-        List<SavingsTransaction> savingsTransactions = savingsAccount.getSavingsTransactions();
-        model.addAttribute("savingsAccount", savingsAccount);
-        model.addAttribute("savingsTransactions", savingsTransactions);
-
-        return "savingsAccount";
+        return "account";
     }
 
     @GetMapping("/deposit")
