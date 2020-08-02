@@ -1,7 +1,7 @@
 package com.bankingapp.banksystem.controller;
 
 import com.bankingapp.banksystem.factory.AccountFactory;
-import com.bankingapp.banksystem.factory.TransactionFactory;
+import com.bankingapp.banksystem.factory.TransactionsFactory;
 import com.bankingapp.banksystem.model.*;
 import com.bankingapp.banksystem.service.AccountService;
 import com.bankingapp.banksystem.service.UserService;
@@ -33,7 +33,7 @@ public class AccountController {
     public String account(@PathVariable String type, Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
         Account account = AccountFactory.getAccount(user, type);
-        List<Transaction> transactions = TransactionFactory.getTransactions(user, type);
+        List<Transaction> transactions = TransactionsFactory.getTransactions(user, type);
         model.addAttribute("account", account);
         model.addAttribute("transactions", transactions);
 

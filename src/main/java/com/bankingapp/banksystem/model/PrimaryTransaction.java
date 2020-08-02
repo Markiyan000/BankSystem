@@ -20,11 +20,11 @@ public class PrimaryTransaction extends Transaction{
         super(date, description, type, status, amount, availableBalance);
     }
 
-    public PrimaryAccount getPrimaryAccount() {
+    public Account getPrimaryAccount() {
         return primaryAccount;
     }
 
-    public void setPrimaryAccount(PrimaryAccount primaryAccount) {
-        this.primaryAccount = primaryAccount;
+    public void setAccount(Account primaryAccount) {
+        this.primaryAccount = (PrimaryAccount) primaryAccount;
     }
 }

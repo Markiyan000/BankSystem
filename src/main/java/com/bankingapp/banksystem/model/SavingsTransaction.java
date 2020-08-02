@@ -19,11 +19,11 @@ public class SavingsTransaction extends Transaction{
         super(date, description, type, status, amount, availableBalance);
     }
 
-    public SavingsAccount getSavingsAccount() {
+    public Account getAccount() {
         return savingsAccount;
     }
 
-    public void setSavingsAccount(SavingsAccount savingsAccount) {
-        this.savingsAccount = savingsAccount;
+    public void setAccount(Account savingsAccount) {
+        this.savingsAccount = (SavingsAccount) savingsAccount;
     }
 }

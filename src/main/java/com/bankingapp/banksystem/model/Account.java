@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @MappedSuperclass
-public class Account {
+public abstract class Account {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,4 +40,6 @@ public class Account {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public abstract void addTransaction(Transaction transaction);
 }

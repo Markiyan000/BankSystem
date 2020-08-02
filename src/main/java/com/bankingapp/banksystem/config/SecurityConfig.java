@@ -31,25 +31,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(12, new SecureRandom(SALT.getBytes()));
     }
 
-    private static final String[] PUBLIC_MATCHERS = {
-            "/webjars/**",
-            "/css/**",
-            "/js/**",
-            "/images/**",
-            "/",
-            "/about/**",
-            "/contact/**",
-            "/error/**/*",
-            "/console/**",
-            "/sign-up"
-    };
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests().
               antMatchers("/**").
-      //  antMatchers(PUBLIC_MATCHERS).
                 permitAll().anyRequest().authenticated();
 
         http

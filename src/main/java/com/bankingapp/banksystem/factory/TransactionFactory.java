@@ -1,21 +1,25 @@
 package com.bankingapp.banksystem.factory;
 
-import com.bankingapp.banksystem.model.User;
+import com.bankingapp.banksystem.model.PrimaryTransaction;
+import com.bankingapp.banksystem.model.SavingsTransaction;
+import com.bankingapp.banksystem.model.Transaction;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class TransactionFactory {
+    public static Transaction getTransaction(String accountType, String actionType, String obj, Double amount, BigDecimal balance) {
 
-    public static <T> List<T> getTransactions(User user, String type) {
-        switch (type) {
+        StringBuilder description = new StringBuilder().append(actionType).append(" ").append(accountType).append("account");
+
+        switch (accountType) {
             case "primary": {
-                return (List<T>) user.getPrimaryAccount().getPrimaryTransactions();
+                return new PrimaryTransaction(LocalDateTime.now(), description.toString(), obj, "Finished", amount, balance);
             }
             case "savings": {
-                return (List<T>) user.getSavingsAccount().getSavingsTransactions();
+                return new SavingsTransaction(LocalDateTime.now(), description.toString(), obj, "Finished", amount, balance);
             }
         }
-
         return null;
     }
 }

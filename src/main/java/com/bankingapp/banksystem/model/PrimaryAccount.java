@@ -10,9 +10,10 @@ public class PrimaryAccount extends Account {
     @OneToMany(mappedBy = "primaryAccount", cascade = CascadeType.ALL)
     private List<PrimaryTransaction> primaryTransactions;
 
-    public void addTransaction(PrimaryTransaction primaryTransaction) {
-        primaryTransactions.add(primaryTransaction);
-        primaryTransaction.setPrimaryAccount(this);
+    @Override
+    public void addTransaction(Transaction primaryTransaction) {
+        primaryTransactions.add((PrimaryTransaction) primaryTransaction);
+        primaryTransaction.setAccount(this);
     }
 
     public List<PrimaryTransaction> getPrimaryTransactions() {

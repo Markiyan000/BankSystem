@@ -5,14 +5,15 @@ import java.util.List;
 
 @Entity
 @Table(name = "savings_account")
-public class SavingsAccount extends Account{
+public class SavingsAccount extends Account {
 
     @OneToMany(mappedBy = "savingsAccount", cascade = CascadeType.ALL)
     private List<SavingsTransaction> savingsTransactions;
 
-    public void addTransaction(SavingsTransaction savingsTransaction) {
-        savingsTransactions.add(savingsTransaction);
-        savingsTransaction.setSavingsAccount(this);
+    @Override
+    public void addTransaction(Transaction savingsTransaction) {
+        savingsTransactions.add((SavingsTransaction) savingsTransaction);
+        savingsTransaction.setAccount(this);
     }
 
     public List<SavingsTransaction> getSavingsTransactions() {

@@ -46,12 +46,6 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private SavingsAccount savingsAccount;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Appointment> appointments;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Recipient> recipients;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> roles = new HashSet<>();
 
@@ -135,22 +129,6 @@ public class User implements UserDetails {
     public void setSavingsAccount(SavingsAccount savingsAccount) {
         this.savingsAccount = savingsAccount;
         savingsAccount.setUser(this);
-    }
-
-    public List<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(List<Appointment> appointments) {
-        this.appointments = appointments;
-    }
-
-    public List<Recipient> getRecipients() {
-        return recipients;
-    }
-
-    public void setRecipients(List<Recipient> recipients) {
-        this.recipients = recipients;
     }
 
     public Set<UserRole> getRoles() {
