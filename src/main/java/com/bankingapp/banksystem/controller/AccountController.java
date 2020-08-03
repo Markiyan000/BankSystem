@@ -2,6 +2,7 @@ package com.bankingapp.banksystem.controller;
 
 import com.bankingapp.banksystem.factory.AccountFactory;
 import com.bankingapp.banksystem.factory.TransactionsFactory;
+import com.bankingapp.banksystem.factory.TransactionsFactoryImpl;
 import com.bankingapp.banksystem.model.*;
 import com.bankingapp.banksystem.service.AccountService;
 import com.bankingapp.banksystem.service.UserService;
@@ -23,17 +24,23 @@ public class AccountController {
 
     private AccountService accountService;
 
+    private AccountFactory accountFactory;
+
+    private TransactionsFactory transactionsFactory;
+
     @Autowired
-    public AccountController(UserService userService, AccountService accountService) {
+    public AccountController(UserService userService, AccountService accountService, AccountFactory accountFactory, TransactionsFactory transactionsFactory) {
         this.userService = userService;
         this.accountService = accountService;
+        this.accountFactory = accountFactory;
+        this.transactionsFactory = transactionsFactory;
     }
 
     @GetMapping("/{type}")
     public String account(@PathVariable String type, Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
-        Account account = AccountFactory.getAccount(user, type);
-        List<Transaction> transactions = TransactionsFactory.getTransactions(user, type);
+        Account account = accountFactory.getAccount(user, type);
+        List<Transaction> transactions = transactionsFactory.getTransactions(user, type);
         model.addAttribute("account", account);
         model.addAttribute("transactions", transactions);
 

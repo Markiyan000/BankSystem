@@ -3,6 +3,7 @@ package com.bankingapp.banksystem.service;
 import com.bankingapp.banksystem.factory.AccountFactory;
 import com.bankingapp.banksystem.factory.TransactionFactory;
 import com.bankingapp.banksystem.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
@@ -10,18 +11,28 @@ import java.math.BigDecimal;
 @Service
 public class AccountService {
 
+    private AccountFactory accountFactory;
+
+    private TransactionFactory transactionFactory;
+
+    @Autowired
+    public AccountService(AccountFactory accountFactory, TransactionFactory transactionFactory) {
+        this.accountFactory = accountFactory;
+        this.transactionFactory = transactionFactory;
+    }
+
     @Transactional
     public void makeDeposit(User user, String accountType, Double amount) {
-        Account account = AccountFactory.getAccount(user, accountType);
+        Account account = accountFactory.getAccount(user, accountType);
         deposit(account, amount);
-        account.addTransaction(TransactionFactory.getTransaction(accountType, "Deposit", "Account", amount, account.getAccountBalance()));
+        account.addTransaction(transactionFactory.getTransaction(accountType, "Deposit", "Account", amount, account.getAccountBalance()));
     }
 
     @Transactional
     public void makeWithdraw(User user, String accountType, Double amount) {
-        Account account = AccountFactory.getAccount(user, accountType);
+        Account account = accountFactory.getAccount(user, accountType);
         withdraw(account, amount);
-        account.addTransaction(TransactionFactory.getTransaction(accountType, "Withdraw", "Account", amount, account.getAccountBalance()));
+        account.addTransaction(transactionFactory.getTransaction(accountType, "Withdraw", "Account", amount, account.getAccountBalance()));
     }
 
     private void deposit(Account account, double amount) {

@@ -7,7 +7,7 @@ import java.util.List;
 @Table(name = "savings_account")
 public class SavingsAccount extends Account {
 
-    @OneToMany(mappedBy = "savingsAccount", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "savingsAccount", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<SavingsTransaction> savingsTransactions;
 
     @Override
