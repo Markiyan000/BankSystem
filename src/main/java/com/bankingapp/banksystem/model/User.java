@@ -5,10 +5,7 @@ import com.bankingapp.banksystem.model.security.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "user")
@@ -46,8 +43,20 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private SavingsAccount savingsAccount;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Loan> loans;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> roles = new HashSet<>();
+
+    public User() {
+        loans = new ArrayList<>();
+    }
+
+    public void addLoan(Loan loan) {
+        loans.add(loan);
+        loan.setUser(this);
+    }
 
     public Long getUserId() {
         return userId;
@@ -137,6 +146,14 @@ public class User implements UserDetails {
 
     public void setRoles(Set<UserRole> roles) {
         this.roles = roles;
+    }
+
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
     }
 
     @Override

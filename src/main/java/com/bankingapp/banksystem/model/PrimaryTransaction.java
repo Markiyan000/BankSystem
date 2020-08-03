@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Table(name = "primary_transaction")
 public class PrimaryTransaction extends Transaction{
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "primary_account_id")
     private PrimaryAccount primaryAccount;
 
