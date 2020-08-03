@@ -3,6 +3,7 @@ package com.bankingapp.banksystem.factory;
 import com.bankingapp.banksystem.model.PrimaryTransaction;
 import com.bankingapp.banksystem.model.SavingsTransaction;
 import com.bankingapp.banksystem.model.Transaction;
+import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 public class TransactionFactory {
     public static Transaction getTransaction(String accountType, String actionType, String obj, Double amount, BigDecimal balance) {
 
-        StringBuilder description = new StringBuilder().append(actionType).append(" ").append(accountType).append("account");
+        StringBuilder description = new StringBuilder().append(actionType).append(" ").append(StringUtils.capitalize(accountType)).append(" Account");
 
         switch (accountType) {
             case "primary": {

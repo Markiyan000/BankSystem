@@ -1,5 +1,8 @@
 package com.bankingapp.banksystem.service;
 
+import com.bankingapp.banksystem.utils.StringUtils;
+import com.bankingapp.banksystem.factory.AccountFactory;
+import com.bankingapp.banksystem.factory.TransactionFactory;
 import com.bankingapp.banksystem.model.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,16 +14,12 @@ public class TransferService {
 
     @Transactional
     public void transferBetweenAccounts(User user, String from, double amount) {
-        PrimaryAccount primaryAccount = user.getPrimaryAccount();
-        SavingsAccount savingsAccount = user.getSavingsAccount();
+        Account sender = AccountFactory.getAccount(user, from);
+        Account receiver = AccountFactory.getAccount(user, StringUtils.changeAccountType(from));
 
-        if (from.equals("primary")) {
-            transfer(primaryAccount, savingsAccount, amount);
-            primaryAccount.addTransaction(new PrimaryTransaction(LocalDateTime.now(), "Transfer To Savings Account", "Transfer", "Finished", amount, primaryAccount.getAccountBalance()));
-        } else {
-            transfer(savingsAccount, primaryAccount, amount);
-            savingsAccount.addTransaction(new SavingsTransaction(LocalDateTime.now(), "Transfer To Primary Account", "Transfer", "Finished", amount, primaryAccount.getAccountBalance()));
-        }
+        sender.addTransaction(TransactionFactory.getTransaction(from, "Transfer", "Transfer", amount, sender.getAccountBalance()));
+
+        transfer(sender, receiver, amount);
     }
 
     @Transactional
