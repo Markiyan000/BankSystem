@@ -13,8 +13,8 @@ public class Loan {
     @Column(name = "message")
     private String message;
 
-    @Column(name = "type")
-    private String type;
+    @Column(name = "receiver")
+    private String receiver;
 
     @Column(name = "amount")
     private BigDecimal amount;
@@ -27,9 +27,9 @@ public class Loan {
 
     }
 
-    public Loan(String message, String type, BigDecimal amount) {
+    public Loan(String message, String receiver, BigDecimal amount) {
         this.message = message;
-        this.type = type;
+        this.receiver = receiver;
         this.amount = amount;
     }
 
@@ -49,12 +49,12 @@ public class Loan {
         this.message = message;
     }
 
-    public String getType() {
-        return type;
+    public String getReceiver() {
+        return receiver;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
     }
 
     public BigDecimal getAmount() {
@@ -78,7 +78,7 @@ public class Loan {
         return "Loan{" +
                 "id=" + id +
                 ", message='" + message + '\'' +
-                ", type='" + type + '\'' +
+                ", receiver='" + receiver + '\'' +
                 ", amount=" + amount +
                 '}';
     }
