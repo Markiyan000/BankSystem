@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.math.BigDecimal;
 import java.security.Principal;
 
 @Controller
@@ -30,7 +31,7 @@ public class TransferController {
                                           @RequestParam String accountType,
                                           @RequestParam String amount) {
         User user = userService.findByUsername(principal.getName());
-        transferService.transferBetweenAccounts(user, accountType, Double.parseDouble(amount));
+        transferService.transferBetweenAccounts(user, accountType, new BigDecimal(Double.parseDouble(amount)));
 
         return "redirect:/userFront";
     }
@@ -46,7 +47,7 @@ public class TransferController {
             return "transferToReceiver";
         }
 
-        transferService.transferToReceiver(sender, receiver, Double.parseDouble(amount));
+        transferService.transferToReceiver(sender, receiver, new BigDecimal(Double.parseDouble(amount)));
 
         return "redirect:/userFront";
     }

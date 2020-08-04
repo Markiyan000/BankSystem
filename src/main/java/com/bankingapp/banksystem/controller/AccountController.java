@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
@@ -50,14 +51,14 @@ public class AccountController {
     @GetMapping("/deposit")
     public String makeDeposit(@RequestParam String accountType, @RequestParam String amount, Principal principal) {
         User user = userService.findByUsername(principal.getName());
-        accountService.makeDeposit(user, accountType, Double.parseDouble(amount));
+        accountService.makeDeposit(user, accountType, new BigDecimal(Double.parseDouble(amount)));
         return "redirect:/userFront";
     }
 
     @GetMapping("/withdraw")
     public String makeWithDraw(@RequestParam String accountType, @RequestParam String amount, Principal principal) {
         User user = userService.findByUsername(principal.getName());
-        accountService.makeWithdraw(user, accountType, Double.parseDouble(amount));
+        accountService.makeWithdraw(user, accountType, new BigDecimal(Double.parseDouble(amount)));
         return "redirect:/userFront";
     }
 }

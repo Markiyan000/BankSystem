@@ -6,6 +6,7 @@ import com.bankingapp.banksystem.service.LoanService;
 import com.bankingapp.banksystem.service.TransferService;
 import com.bankingapp.banksystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,23 +30,34 @@ public class LoanController {
         this.transferService = transferService;
     }
 
-    @GetMapping
-    public String createLoan (Principal principal) {
-        Loan loan = new Loan("Could you borrow 500$ me, please?", "markiyan.d_", BigDecimal.valueOf(500));
+    @PostMapping
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public String createLoan(@ModelAttribute Loan loan, Principal principal) {
         loan.setBorrowerName(principal.getName());
         User receiver = userService.findByUsername(loan.getReceiverName());
 
         loanService.addLoan(receiver, loan);
 
+        return "userFront";
+    }
+
+    @GetMapping("/submit/{loanId}")
+    public String submitLoan(@PathVariable Long loanId, Principal principal) {
+
+        Loan loan = loanService.findById(loanId);
+
+        User borrower = userService.findByUsername(loan.getBorrowerName());
+        User receiver = userService.findByUsername(principal.getName());
+
+        transferService.transferToReceiver(receiver, borrower, loan.getAmount());
+        loanService.removeById(loanId);
+
         return "redirect:/userFront";
     }
 
-    @GetMapping("/submit")
-    public String submitLoan(@RequestParam String borrowerName, @RequestParam String amount, Principal principal) {
-        User borrower = userService.findByUsername(borrowerName);
-        User receiver = userService.findByUsername(principal.getName());
-
-        transferService.transferToReceiver(receiver, borrower, Double.parseDouble(amount));
+    @DeleteMapping("/reject/{loanId}")
+    public String rejectLoan(@PathVariable Long loanId) {
+        loanService.removeById(loanId);
 
         return "redirect:/userFront";
     }

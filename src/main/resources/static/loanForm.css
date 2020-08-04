@@ -1,0 +1,15 @@
+input[type=text] {
+    border: 2px solid green;
+}
+
+input:hover, select:hover {
+    background-color: lightgreen;
+}
+
+.submit {
+    border: 2px solid green;
+}
+
+.submit:hover{
+    background-color: green;
+}

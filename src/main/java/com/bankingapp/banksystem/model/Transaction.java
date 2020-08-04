@@ -23,7 +23,7 @@ public abstract class Transaction {
     private String status;
 
     @Column(name = "amount")
-    private Double amount;
+    private BigDecimal amount;
 
     @Column(name = "available_balance")
     private BigDecimal availableBalance;
@@ -32,7 +32,7 @@ public abstract class Transaction {
 
     }
 
-    public Transaction(LocalDateTime date, String description, String type, String status, Double amount, BigDecimal availableBalance) {
+    public Transaction(LocalDateTime date, String description, String type, String status, BigDecimal amount, BigDecimal availableBalance) {
         this.date = date;
         this.description = description;
         this.type = type;
@@ -81,11 +81,11 @@ public abstract class Transaction {
         this.status = status;
     }
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Loan Form</title>
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/common/transfer.css">
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/loanForm.css">
 </head>
 <body>
-$END$
+
+    <div th:replace="common/header"></div>
+
+    <div id="formDiv">
+        <form th:action="@{/loan}" method="post">
+            <label>
+                <textarea type="text" th:value="${loan.message}" name="message" rows="10" cols="45"></textarea>
+            </label>
+            <label>
+                <input type="text" th:value="${loan.receiverName}" name="receiverName" placeholder="Enter receiver name...">
+            </label>
+            <label>
+                <input type="text" th:value="${loan.amount}" name="amount" placeholder="Enter amount...">
+            </label>
+            <button class="submit" type="submit">SEND</button>
+        </form>
+    </div>
 </body>
 </html>

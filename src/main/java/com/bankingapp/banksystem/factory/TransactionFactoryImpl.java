@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class TransactionFactoryImpl implements TransactionFactory {
 
     @Override
-    public Transaction getTransaction(String accountType, String actionType, String obj, Double amount, BigDecimal balance) {
+    public Transaction getTransaction(String accountType, String actionType, String obj, BigDecimal amount, BigDecimal balance) {
 
         StringBuilder description = new StringBuilder().append(actionType).append(" ").append(StringUtils.capitalize(accountType)).append(" Account");
 

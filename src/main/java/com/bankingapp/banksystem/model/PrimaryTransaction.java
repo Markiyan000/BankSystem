@@ -16,7 +16,7 @@ public class PrimaryTransaction extends Transaction{
 
     }
 
-    public PrimaryTransaction(LocalDateTime date, String description, String type, String status, Double amount, BigDecimal availableBalance) {
+    public PrimaryTransaction(LocalDateTime date, String description, String type, String status, BigDecimal amount, BigDecimal availableBalance) {
         super(date, description, type, status, amount, availableBalance);
     }
 

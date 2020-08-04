@@ -22,24 +22,24 @@ public class AccountService {
     }
 
     @Transactional
-    public void makeDeposit(User user, String accountType, Double amount) {
+    public void makeDeposit(User user, String accountType, BigDecimal amount) {
         Account account = accountFactory.getAccount(user, accountType);
         deposit(account, amount);
         account.addTransaction(transactionFactory.getTransaction(accountType, "Deposit", "Account", amount, account.getAccountBalance()));
     }
 
     @Transactional
-    public void makeWithdraw(User user, String accountType, Double amount) {
+    public void makeWithdraw(User user, String accountType, BigDecimal amount) {
         Account account = accountFactory.getAccount(user, accountType);
         withdraw(account, amount);
         account.addTransaction(transactionFactory.getTransaction(accountType, "Withdraw", "Account", amount, account.getAccountBalance()));
     }
 
-    private void deposit(Account account, double amount) {
-        account.setAccountBalance(account.getAccountBalance().add(new BigDecimal(amount)));
+    private void deposit(Account account, BigDecimal amount) {
+        account.setAccountBalance(account.getAccountBalance().add(amount));
     }
 
-    private void withdraw(Account account, double amount) {
-        account.setAccountBalance(account.getAccountBalance().subtract(new BigDecimal(amount)));
+    private void withdraw(Account account, BigDecimal amount) {
+        account.setAccountBalance(account.getAccountBalance().subtract(amount));
     }
 }

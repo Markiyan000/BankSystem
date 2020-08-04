@@ -15,7 +15,7 @@ public class SavingsTransaction extends Transaction{
     public SavingsTransaction() {
     }
 
-    public SavingsTransaction(LocalDateTime date, String description, String type, String status, Double amount, BigDecimal availableBalance) {
+    public SavingsTransaction(LocalDateTime date, String description, String type, String status, BigDecimal amount, BigDecimal availableBalance) {
         super(date, description, type, status, amount, availableBalance);
     }
 

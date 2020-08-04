@@ -24,7 +24,7 @@ public class TransferService {
     }
 
     @Transactional
-    public void transferBetweenAccounts(User user, String from, double amount) {
+    public void transferBetweenAccounts(User user, String from, BigDecimal amount) {
         Account sender = accountFactory.getAccount(user, from);
         Account receiver = accountFactory.getAccount(user, StringUtils.changeAccountType(from));
 
@@ -34,7 +34,7 @@ public class TransferService {
     }
 
     @Transactional
-    public void transferToReceiver(User sender, User receiver, double amount) {
+    public void transferToReceiver(User sender, User receiver, BigDecimal amount) {
         PrimaryAccount senderAccount = sender.getPrimaryAccount();
         PrimaryAccount receiverAccount = receiver.getPrimaryAccount();
 
@@ -44,8 +44,8 @@ public class TransferService {
         transfer(senderAccount, receiverAccount, amount);
     }
 
-    private void transfer(Account from, Account to, double amount) {
-        from.setAccountBalance(from.getAccountBalance().subtract(new BigDecimal(amount)));
-        to.setAccountBalance(to.getAccountBalance().add(new BigDecimal(amount)));
+    private void transfer(Account from, Account to, BigDecimal amount) {
+        from.setAccountBalance(from.getAccountBalance().subtract(amount));
+        to.setAccountBalance(to.getAccountBalance().add(amount));
     }
 }
