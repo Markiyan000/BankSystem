@@ -30,8 +30,10 @@ public class LoanController {
     }
 
     @GetMapping
-    public String createLoan(@ModelAttribute Loan loan, Principal principal) {
-        User receiver = userService.findByUsername(loan.getReceiver());
+    public String createLoan (Principal principal) {
+        Loan loan = new Loan("Could you borrow 500$ me, please?", "markiyan.d_", BigDecimal.valueOf(500));
+        loan.setBorrowerName(principal.getName());
+        User receiver = userService.findByUsername(loan.getReceiverName());
 
         loanService.addLoan(receiver, loan);
 

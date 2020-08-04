@@ -13,8 +13,11 @@ public class Loan {
     @Column(name = "message")
     private String message;
 
-    @Column(name = "receiver")
-    private String receiver;
+    @Column(name = "borrower_name")
+    private String borrowerName;
+
+    @Transient
+    private String receiverName;
 
     @Column(name = "amount")
     private BigDecimal amount;
@@ -27,9 +30,9 @@ public class Loan {
 
     }
 
-    public Loan(String message, String receiver, BigDecimal amount) {
+    public Loan(String message, String receiverName, BigDecimal amount) {
         this.message = message;
-        this.receiver = receiver;
+        this.receiverName = receiverName;
         this.amount = amount;
     }
 
@@ -49,12 +52,20 @@ public class Loan {
         this.message = message;
     }
 
-    public String getReceiver() {
-        return receiver;
+    public String getBorrowerName() {
+        return borrowerName;
     }
 
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
+    public void setBorrowerName(String borrowerName) {
+        this.borrowerName = borrowerName;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
     }
 
     public BigDecimal getAmount() {
@@ -78,7 +89,7 @@ public class Loan {
         return "Loan{" +
                 "id=" + id +
                 ", message='" + message + '\'' +
-                ", receiver='" + receiver + '\'' +
+                ", borrower='" + borrowerName + '\'' +
                 ", amount=" + amount +
                 '}';
     }
