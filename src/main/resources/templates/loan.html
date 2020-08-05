@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Loan</title>
+    <link rel="stylesheet" href="http://localhost:63342/bank-system/src/main/resources/static/loan.css">
 </head>
 <body>
-    Loan
+    <div th:replace="common/header"></div>
+
+
+    <div id="caption">Loans</div>
+
+    <table th:each="loan :${loans}">
+        <tr>
+            <td th:text="${loan.message}">...</td>
+            <td th:text="${loan.borrowerName}">...</td>
+            <td th:text="${loan.amount}">...</td>
+            <td><a th:href="@{/loan/submit/{loanId}(loanId=${loan.id})}" id="submit">SUBMIT</a></td>
+            <td><a type="button" th:href="@{/loan/reject/{loanId}(loanId=${loan.id})}" id="reject">REJECT</a></td>
+        </tr>
+    </table>
+
 </body>
 </html>

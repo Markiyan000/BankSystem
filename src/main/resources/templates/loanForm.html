@@ -13,7 +13,7 @@
     <div id="formDiv">
         <form th:action="@{/loan}" method="post">
             <label>
-                <textarea type="text" th:value="${loan.message}" name="message" rows="10" cols="45"></textarea>
+                <textarea type="text" th:value="${loan.message}" name="message" rows="10" cols="45" placeholder="Message..."></textarea>
             </label>
             <label>
                 <input type="text" th:value="${loan.receiverName}" name="receiverName" placeholder="Enter receiver name...">

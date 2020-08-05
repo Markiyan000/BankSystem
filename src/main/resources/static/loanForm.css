@@ -6,6 +6,16 @@ input:hover, select:hover {
     background-color: lightgreen;
 }
 
+textarea {
+    border: 2px solid green;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+}
+
+textarea:hover {
+    background-color: lightgreen;
+}
+
 .submit {
     border: 2px solid green;
 }
