@@ -42,9 +42,14 @@ public class LoanController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public String createLoan(@ModelAttribute Loan loan, Principal principal) {
+    public String createLoan(@ModelAttribute Loan loan, Principal principal, Model model) {
         loan.setBorrowerName(principal.getName());
         User receiver = userService.findByUsername(loan.getReceiverName());
+
+        if (receiver == null) {
+            model.addAttribute("userNotExists", true);
+            return "loanForm";
+        }
 
         loanService.addLoan(receiver, loan);
 

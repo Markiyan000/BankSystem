@@ -10,6 +10,8 @@
 
     <div th:replace="common/header"></div>
 
+    <label id="errorMessage" th:if="${userNotExists}" ><strong style="color: red">User doesn't exist !</strong></label>
+
     <div id="formDiv">
         <form th:action="@{/loan}" method="post">
             <label>
