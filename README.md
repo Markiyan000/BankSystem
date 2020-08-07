@@ -9,6 +9,6 @@ This is a simple banking app that have a lot of features such as:
 - the ability to request a loan from other user of system
 
 Technologies:
-Server Side: Java 8, Spring Boot, Spring Security, Spring MVC, Spring Data JPA, Hibernate.
-Client Side: HTML, CSS, Thymeleaf.
-Data Storage: MySQL.
+- Server Side: Java 8, Spring Boot, Spring Security, Spring MVC, Spring Data JPA, Hibernate.
+- Client Side: HTML, CSS, Thymeleaf.
+- Data Storage: MySQL.
